@@ -766,6 +766,10 @@ mongoose.connect(process.env.MONGO_URI)
    - 필요한 부분만 사용 가능
    - 다양한 미들웨어 조합 가능
 
+---
+
+## Express의 장점 정리 (계속)
+
 3. **성능**: 
    - 빠른 속도와 적은 자원 사용
 
@@ -787,10 +791,16 @@ mongoose.connect(process.env.MONGO_URI)
    - Express 프레임워크
    - MongoDB 같은 데이터베이스
 
+---
+
+## 백엔드 개발자가 되려면? (계속)
+
 3. **실습 프로젝트**:
    - 간단한 API 서버 만들기
    - CRUD 작업 구현하기
    - 인증 시스템 구현하기
+   - 다양한 API 기능 구현하기
+   - 다양한 공격 방식을 배우고 보안 시스템 구축하기
 
 ---
 
