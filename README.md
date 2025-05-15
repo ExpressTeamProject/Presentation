@@ -15,7 +15,7 @@ backgroundImage: url('https://marp.app/assets/hero-background.svg')
 
 1. 프로젝트 구조 개요
 2. 라우터(Router): 경로 관리와 요청 분배
-3. 미들웨어(Middleware): 요청 처리 중간 단계
+3. 미들웨어(Middleware): 요청 처리의 중간 단계
 4. 컨트롤러(Controller): 비즈니스 로직 처리
 5. 모델(Model): 데이터 구조 정의
 6. 유틸리티(Utility): 헬퍼 기능
@@ -25,7 +25,7 @@ backgroundImage: url('https://marp.app/assets/hero-background.svg')
 
 ## 프로젝트 구조
 
-Express.js 백엔드는 MVC 패턴을 기반으로 구성되어 있습니다:
+Express.js 백엔드는 MVC 아키텍처 패턴을 기반으로 구조화되어 있습니다.
 
 ```
 server/
@@ -128,13 +128,13 @@ mongoose.connect(process.env.MONGO_URI)
 
 ## 라우터 작동 방식
 
-라우터는 **경로 정의**(URI + HTTP 메서드) → **미들웨어 적용** → **컨트롤러 실행** 순서로 작동합니다.
+라우터는 **경로 정의**(URI + HTTP 메서드) → **미들웨어 적용** → **컨트롤러 실행** 순서로 작동.
 
 ```
 클라이언트 요청 → 라우터 → (미들웨어) → 컨트롤러 → 응답
 ```
 
-실생활 비유: **우체국 분류 시스템**
+실생활 비유: **우체국의 우편물 분류 시스템**
 - 우편물(요청)에 적힌 주소(URL)에 따라 
 - 적절한 담당자(컨트롤러)에게 전달
 
@@ -193,7 +193,7 @@ router.put('/:id/like', protect, postController.toggleLike);
 
 ## 라우터 사용법
 
-`app.js`에서 라우터를 기본 경로와 함께 등록합니다:
+`app.js`에서 라우터를 기본 경로와 함께 등록.
 
 ```javascript
 // app.js
@@ -210,7 +210,8 @@ app.use('/comments', commentRoutes);
 ```
 
 `app.use('/auth', authRoutes)` 의미:
-- '/auth'로 시작하는 모든 요청은 authRoutes가 처리
+- 클라이언트가'/auth'로 시작하는 경로에 요청을 보낼 경우, 
+  해당 요청은 authRoutes에서 정의된 라우터가 처리.
 - 예: '/auth/login', '/auth/register' 등
 
 ---
@@ -225,7 +226,7 @@ app.use('/comments', commentRoutes);
 
 ## 미들웨어 작동 방식
 
-미들웨어는 **요청 전처리** → **응답 생성 또는 다음 미들웨어 호출**의 순서로 작동합니다.
+미들웨어는 **요청 전처리** → **응답 생성 또는 다음 미들웨어 호출**의 순서로 작동.
 
 ```
 요청 → 미들웨어1 → 미들웨어2 → ... → 라우트 핸들러 → 응답
@@ -388,7 +389,7 @@ exports.errorHandler = (err, req, res, next) => {
 
 ## 비동기 핸들러 유틸리티
 
-에러 처리 미들웨어와 함께 비동기 함수의 오류를 캐치하는 유틸리티:
+에러 처리 미들웨어와 함께 비동기 함수의 오류를 캐치하는 유틸리티.
 
 ```javascript
 // middleware/errorHandler.js
@@ -428,7 +429,7 @@ exports.getPost = asyncHandler(async (req, res) => {
 
 ## 컨트롤러 작동 방식
 
-컨트롤러는 **요청 데이터 추출** → **비즈니스 로직 처리** → **응답 반환**의 순서로 작동합니다.
+컨트롤러는 **요청 데이터 추출** → **비즈니스 로직 처리** → **응답 반환**의 순서로 작동.
 
 실생활 비유: **레스토랑 주방장**
 - 주문(요청)을 받아서
@@ -690,7 +691,7 @@ PostSchema.virtual('likeCount').get(function () {
 
 ## 5. 유틸리티(Utility) 함수
 
-프로젝트에서 재사용 가능한 다양한 헬퍼 함수들을 제공합니다.
+프로젝트에서 재사용 가능한 다양한 헬퍼 함수들을 제공.
 
 1. **파일 업로드 유틸리티** (multer 설정)
 2. **OpenAI API 연동 유틸리티**
@@ -793,11 +794,11 @@ class OpenAIClient {
 
 1. **클라이언트에서 요청 전송** (`POST /posts/123/comments`)
 2. **Express 앱**이 요청을 받아 전역 미들웨어 적용 (JSON 파싱, CORS 등)
-3. **라우터**가 경로에 맞는 핸들러로 요청 전달 (`commentRoutes.js`)
+3. **라우터**가 경로에 따라 적합한 핸들러로 요청 전달 (`commentRoutes.js`)
 4. **인증 미들웨어**가 JWT 토큰을 검증하고 사용자 정보 추가
 5. **컨트롤러**가 비즈니스 로직 처리 (`commentController.createComment`)
 6. **모델**을 통해 데이터베이스 작업 수행 (`Comment.create()`)
-7. **컨트롤러**가 응답 생성 (`res.status(201).json({...})`)
+7. **컨트롤러**가 클라이언트에 응답 반환 (`res.status(201).json({...})`)
 8. **클라이언트**가 응답 수신
 
 ---
